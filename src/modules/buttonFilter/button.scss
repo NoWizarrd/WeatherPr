@@ -1,0 +1,13 @@
+.button{
+    display: flex;
+    position: relative;
+    background: rgb(131, 129, 129);
+    border: solid 2px rgb(67, 64, 64);
+    border-radius: 25px;
+    height: 20px;
+    width: auto;
+    padding: 7px;
+    &:hover{
+        cursor: pointer;
+    }
+}

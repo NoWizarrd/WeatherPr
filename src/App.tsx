@@ -1,12 +1,13 @@
 import React from "react";
+import Header from './modules/header/Header.tsx'
+import Content from "./modules/content/Content.tsx";
 
-type Props = {
-  id: number;
-  name: string;
-  aliases: string[];
-};
 
-export default function App({}: Props) {
-  const a: number = 2;
-  return <div>App</div>;
+export default function App() {
+  return(
+    <>
+      <Header/>
+      <Content/>
+    </>
+  );
 }
