@@ -9,6 +9,7 @@ export default function Header() {
       <div className="header">
         <div >Weather project</div>
         <div className="header_actions">
+          <ButtonFilter>На главную</ButtonFilter>
           <ButtonFilter>Список</ButtonFilter>
           <ButtonFilter>Карта</ButtonFilter>
         </div>

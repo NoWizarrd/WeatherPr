@@ -1,15 +1,18 @@
 .button{
-    display: flex;
-    background: rgb(131, 129, 129);
-    border: solid 2px rgb(67, 64, 64);
+    background: rgb(21, 138, 162) 100%;
+    border: solid 2px rgb(54, 54, 54);
     border-radius: 25px;
-    height: 30px;
-    width: 90px;
+    height: 35px;
+    width: 110px;
+    color: white;
+    text-align: center;
     vertical-align: middle;
     padding: 5px;
     margin-left: 25px;
+    box-shadow: 6px 4px 11px rgba(0, 0, 0, 0.3);
     font-family: 'Golos Text', sans-serif;
     &:hover{
         cursor: pointer;
+        border: solid 2px rgb(232, 211, 211);
     }
 }
