@@ -1,10 +1,74 @@
 import React from "react";
 import "./content.scss";
+import Checkbox from '@mui/material/Checkbox';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import Switch from "@mui/material/Switch";
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+import Autocomplete from '@mui/material/Autocomplete';
 
+
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+const top100Films = [
+  { title: 'The Shawshank Redemption', year: 1994 },
+  { title: 'The Godfather', year: 1972 },
+  { title: 'The Godfather: Part II', year: 1974 },
+  { title: 'The Dark Knight', year: 2008 },
+]
 export default function Content() {
   return (
-    <>
       <div className="content">
+        <div>
+        <Checkbox {...label} defaultChecked />
+        <Checkbox {...label} />
+        <Checkbox {...label} disabled />
+        <Checkbox {...label} disabled checked />
+        </div>
+
+      <FormControl>
+        <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+        <RadioGroup
+          aria-labelledby="demo-radio-buttons-group-label"
+          defaultValue="female"
+          name="radio-buttons-group"
+        >
+          <FormControlLabel value="female" control={<Radio />} label="Female" />
+          <FormControlLabel value="male" control={<Radio />} label="Male" />
+          <FormControlLabel value="other" control={<Radio />} label="Other" />
+        </RadioGroup>
+      </FormControl>
+
+      <Switch {...label} />
+
+      <Stack spacing={2} sx={{ width: 300 }}>
+      <Autocomplete
+        id="free-solo-demo"
+        freeSolo
+        options={top100Films.map((option) => option.title)}
+        renderInput={(params) => <TextField {...params} label="freeSolo" />}
+      />
+      <Autocomplete
+        freeSolo
+        id="free-solo-2-demo"
+        disableClearable
+        options={top100Films.map((option) => option.title)}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Search input"
+            InputProps={{
+              ...params.InputProps,
+              type: 'search',
+            }}
+          />
+        )}
+      />
+    </Stack>
+
         <div>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
           repellat repudiandae doloribus velit explicabo eius excepturi delectus
@@ -33,6 +97,5 @@ export default function Content() {
           praesentium beatae porro, facere soluta temporibus cum ducimus
         </div>
       </div>
-    </>
   );
 }

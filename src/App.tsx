@@ -1,13 +1,28 @@
 import React from "react";
-import Header from './modules/header/Header.tsx'
+import Layout from "./modules/layout/layout.tsx";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import MainPage from "./pages/Main_page.tsx";
+import MapPage from "./pages/Map_page.tsx";
+import ListPage from "./pages/List_page.tsx";
 import Content from "./modules/content/Content.tsx";
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <Content />,
+      },
+      {
+        path: "list",
+        element: <ListPage />,
+      },
+    ],
+  },
+]);
 
 export default function App() {
-  return(
-    <>
-      <Header/>
-      <Content/>
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
