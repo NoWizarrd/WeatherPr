@@ -13,11 +13,15 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Content />,
+        element: <MainPage />,
       },
       {
         path: "list",
         element: <ListPage />,
+      },
+      {
+        path: "map",
+        element: <MapPage/>,
       },
     ],
   },

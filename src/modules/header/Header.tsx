@@ -2,16 +2,31 @@ import React from "react";
 import "./header.scss";
 import ButtonFilter from "../buttonFilter/ButtonFilter";
 import Input from "../intput/Input";
+import { NavLink } from "react-router-dom";
 
-export default function Header() {
+// const isActive = (active:string) => {
+//   return active ? active = 'button' : active = "button-active"
+// }
+
+export default function Header() { // onClick={isActive} v button ts error
   return (
     <>
       <div className="header">
-        <div >Weather project</div>
+        
+        <div>Weather project</div>
+
         <div className="header_actions">
-          <ButtonFilter>На главную</ButtonFilter>
+          <NavLink to="/">
+            <ButtonFilter >На главную</ButtonFilter> 
+          </NavLink>
+
+          <NavLink to="/list">
           <ButtonFilter>Список</ButtonFilter>
+          </NavLink>
+
+          <NavLink to="/map">
           <ButtonFilter>Карта</ButtonFilter>
+          </NavLink>
         </div>
       </div>
     </>

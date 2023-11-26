@@ -68,7 +68,6 @@ export default function Content() {
         )}
       />
     </Stack>
-
         <div>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
           repellat repudiandae doloribus velit explicabo eius excepturi delectus
