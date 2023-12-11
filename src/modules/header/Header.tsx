@@ -21,7 +21,7 @@ export default function Header() { // onClick={isActive} v button ts error
           </NavLink>
 
           <NavLink to="/list">
-          <ButtonFilter>Список</ButtonFilter>
+          <ButtonFilter>Погода</ButtonFilter>
           </NavLink>
 
           <NavLink to="/map">
