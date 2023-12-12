@@ -51,7 +51,7 @@ interface WeatherData {
 const API_key = '7c105a75bb7e095e8ba6d6e3cadfca70'
 //const url = `https://api.openweathermap.org/data/2.5/weather?lat=56&lon=92&appid=${API_key}`
 let response:WeatherData;
-let city:string;
+let ans:string;
 
 // function translit(word:string){
 // 	var answer = '';
@@ -84,19 +84,11 @@ let city:string;
 // 	return answer;
 // }
 
-async function FindCoordinates(city:string) {
-  try {
-      city = (await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_key}`)).data
-      //.then((res)=>console.log(res.data))
-      //.catch((e) => {throw new Error(e)})
-  } catch (e) {
-      console.log(e)
-  }
-}
 
-async function WeatherApi() { //заменить координаты на данные из FindCoordinates
+
+async function WeatherApi(lat:string, lon:string) { //заменить координаты на данные из FindCoordinates
   try {
-      response = (await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=56&lon=92&appid=${API_key}`)).data
+      response = (await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}6&lon=${lon}&appid=${API_key}`)).data
       //.then((res)=>console.log(res.data))
       //.catch((e) => {throw new Error(e)})
   } catch (e) {
@@ -105,32 +97,36 @@ async function WeatherApi() { //заменить координаты на да�
 }
 
 interface ICity{
-  city:string
+  lat:string,
+  lon:string
 }
 
 export default function DenseTable(props:ICity) {
 
-  
+  //FindCoordinates(props.city)
   useEffect(()=>{
-    setTimeout(WeatherApi, 1000)
-    console.log(FindCoordinates(props.city))
-  }, [response, props.city])
+    WeatherApi(props.lat,props.lon)
+    //setTimeout(WeatherApi, 1000)
+    //console.log(FindCoordinates(props.city))
+  }, [response, props.lat])
 
   //console.log(response)
 
   const rows = [
-    createData('name', response?.name),
-    createData('timezone', response?.timezone),
-    createData('feels like', response?.main.feels_like),
-    createData('temp', response?.main.temp),
-    createData('wind speed', response?.wind.speed),
+    createData('Название', response?.name),
+    createData('Временная зона', response?.timezone / 3600),
+    createData('Температура сейчас', response?.main.temp),
+    createData('Ощущается как', response?.main.feels_like),
+    createData('Максимальная температура', response?.main.temp_max),
+    createData('Минимальная температура', response?.main.temp_min),
+    createData('Давление', response?.main.pressure),
   ];
   
 
   return (
     !response ? <div>loading...</div> :
 
-    <TableContainer component={Paper} sx={{ maxWidth: '80vw'}}>
+    <TableContainer component={Paper} sx={{ maxWidth: '40vw'}}>
       <Table sx={{ minWidth: 650}} size="small" aria-label="a dense table">
         <TableBody>
           {rows.map((row) => (

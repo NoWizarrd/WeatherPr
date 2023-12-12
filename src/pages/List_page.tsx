@@ -14,6 +14,8 @@ const cities = [ // С api подгружать
   'Krasnoyarsk',
   "Moscow",
   "London",
+  "Novosibirsk",
+  "Kansk"
 ]
 
 const Aria = styled.div`
@@ -25,7 +27,19 @@ const Aria = styled.div`
   padding: 15px;
 `
 
-
+const API_key = '7c105a75bb7e095e8ba6d6e3cadfca70'
+let ans;
+async function FindCoordinates(city:string) {
+  try {
+      ans = (await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_key}`)).data[0]
+      //.then((res)=>console.log(res.data))
+      //.catch((e) => {throw new Error(e)})
+      console.log(ans.lat, ans.lon)
+      return ans
+  } catch (e) {
+      console.log(e)
+  }
+}
 
 
 export default function ListPage() {
@@ -52,9 +66,10 @@ export default function ListPage() {
           sx={{ width: 300, marginBottom:'40px', display: 'flex' }}
           renderInput={(params) => <TextField {...params} label="city"/>}
           onChange={(event, value, reason) => {setTextValue(value)}}
+          onInputChange={(event, value, reason) => {FindCoordinates(value)}}
         />
-
-          {textValue && <DenseTable city={textValue}/>}
+          {textValue && //пришлось сделать проверку на null
+          <DenseTable lat={ans?.lat} lon={ans?.lon}/>}
           
 
           {/* данные в виде таблицы нужна с api подгрузить после выделения города в поле текста сверху */}
