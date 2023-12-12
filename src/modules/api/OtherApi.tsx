@@ -1,19 +1,43 @@
-import axios from 'axios'
-import React from 'react'
+import axios from "axios";
+import { GeocoderResponse, WeatherResponse } from "./schemas";
 
+const BASE_URL = "https://api.openweathermap.org";
+const appid = "7c105a75bb7e095e8ba6d6e3cadfca70";
 
+const geocoderUrl = "/geo/1.0/direct";
+const weatherUrl = "/data/2.5/weather";
 
-const API_key = '7c105a75bb7e095e8ba6d6e3cadfca70'
-const url = `https://api.openweathermap.org/data/2.5/weather?lat=56&lon=92&appid=${API_key}`
+export async function getWeather(lat: number, lon: number) {
+  try {
+    const response = await axios.get<WeatherResponse>(BASE_URL + weatherUrl, {
+      params: {
+        lat,
+        lon,
+        appid,
+      },
+    });
 
-export async function WeatherApi() {
-    let response;
-    try {
-        response = await axios.get(url).then((res)=>console.log(res.data))
-        .catch((e) => {throw new Error(e)})
-        //console.log(response.data)
-    } catch (e) {
-        console.log(e)
-    }
-    console.log(response)
+    return response.data;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function findCity(name: string) {
+  try {
+    const response = await axios.get<GeocoderResponse[]>(
+      BASE_URL + geocoderUrl,
+      {
+        params: {
+          q: name,
+          limit: 1,
+          appid,
+        },
+      }
+    );
+
+    return response.data[0];
+  } catch (e) {
+    console.log(e);
+  }
 }
