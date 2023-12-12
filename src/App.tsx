@@ -5,6 +5,11 @@ import MainPage from "./pages/Main_page.tsx";
 import MapPage from "./pages/Map_page.tsx";
 import ListPage from "./pages/List_page.tsx";
 import Content from "./modules/content/Content.tsx";
+import QueryPage from "./pages/QueryPage.tsx";
+
+import store from "./store/store.ts";
+import { Provider } from "react-redux";
+import ReduxPage from "./pages/ReduxPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -21,12 +26,24 @@ const router = createBrowserRouter([
       },
       {
         path: "map",
-        element: <MapPage/>,
+        element: <MapPage />,
+      },
+      {
+        path: "query",
+        element: <QueryPage />,
+      },
+      {
+        path: "redux",
+        element: <ReduxPage />,
       },
     ],
   },
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  );
 }

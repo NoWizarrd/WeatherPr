@@ -8,24 +8,32 @@ import { NavLink } from "react-router-dom";
 //   return active ? active = 'button' : active = "button-active"
 // }
 
-export default function Header() { // onClick={isActive} v button ts error
+export default function Header() {
+  // onClick={isActive} v button ts error
   return (
     <>
       <div className="header">
-        
         <div>Weather project</div>
 
         <div className="header_actions">
           <NavLink to="/">
-            <ButtonFilter >На главную</ButtonFilter> 
+            <ButtonFilter>На главную</ButtonFilter>
           </NavLink>
 
           <NavLink to="/list">
-          <ButtonFilter>Погода</ButtonFilter>
+            <ButtonFilter>Погода</ButtonFilter>
           </NavLink>
 
           <NavLink to="/map">
-          <ButtonFilter>Карта</ButtonFilter>
+            <ButtonFilter>Карта</ButtonFilter>
+          </NavLink>
+
+          <NavLink to="/redux">
+            <ButtonFilter>redux</ButtonFilter>
+          </NavLink>
+
+          <NavLink to="/query">
+            <ButtonFilter>query</ButtonFilter>
           </NavLink>
         </div>
       </div>
