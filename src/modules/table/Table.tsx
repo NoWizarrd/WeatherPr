@@ -13,18 +13,18 @@ function createData(name: string, value: string | number) {
   };
 }
 
-export default function DenseTable({ data }: { data: WeatherResponse }) {
+export default function DenseTable({ Data }: { Data: WeatherResponse }) {
   const rows = [
-    createData("Название", data?.name),
-    createData("Временная зона", data?.timezone / 3600),
-    createData("Температура сейчас", data?.main.temp),
-    createData("Ощущается как", data?.main.feels_like),
-    createData("Максимальная температура", data?.main.temp_max),
-    createData("Минимальная температура", data?.main.temp_min),
-    createData("Давление", data?.main.pressure),
+    createData("Название", Data?.name),
+    createData("Временная зона", Data?.timezone / 3600),
+    createData("Температура сейчас", Data?.main.temp),
+    createData("Ощущается как", Data?.main.feels_like),
+    createData("Максимальная температура", Data?.main.temp_max),
+    createData("Минимальная температура", Data?.main.temp_min),
+    createData("Давление", Data?.main.pressure),
   ];
 
-  if (!data) {
+  if (!Data) {
     return <div>loading...</div>;
   }
 

@@ -1,38 +1,42 @@
 import React, { useEffect, useState } from "react";
-import { findCity, getWeather } from "../modules/api/OtherApi";
-import { WeatherResponse } from "../modules/api/schemas";
+//import { findCity, getWeather } from "../modules/api/OtherApi";
+import { GeocoderResponse, WeatherResponse } from "../modules/api/schemas";
 import DenseTable from "../modules/table/Table";
+import { useAppDispatch, useAppSelector } from "../store/baseHooks";
+import { changeCity } from "../store/citySlice";
+import { useGetCoordinatesQuery, useGetWeatherQuery } from "../store/weatherApi";
+import { changeCoordinates } from "../store/coordSlice";
+
 
 export default function ListPage() {
-  const [city, setCity] = useState("");
 
-  const [data, setData] = useState<WeatherResponse>();
+  const dispatch = useAppDispatch()
+  const {city} = useAppSelector((state)=> state.city)
+  const {lat, lon} = useAppSelector((state)=> state.coordinates)
+  const [dataCoord, setDataCoord] = useState({lat:lat, lon:lon})
+  const { data, isLoading } = useGetCoordinatesQuery(city);
+  //let res:number = 1; 
+  //useGetWeatherQuery(data[0].lon, data[0].lat)
+//useGetWeatherQuery(dataCoord).data
 
-  const getData = async () => {
-    const coordsRes = await findCity(city);
-
-    if (!coordsRes) {
-      return;
-    }
-
-    const { lat, lon } = coordsRes;
-
-    const weatherRes = await getWeather(lat, lon);
-
-    if (!weatherRes) {
-      return;
-    }
-
-    setData(weatherRes);
-  };
-
-  return (
+  //Срабатывает на второй раз присваивание координат в 28 и 34 строке
+  return ( //хотел вызвать useGetWeatherQuery по нажатию кнопки
     <div>
-      <input value={city} onChange={(e) => setCity(e.target.value)} />
+      <input onChange={(event)=> {
+        dispatch(changeCity(event.target.value));
+        if(data){
+          setDataCoord({lat:data[0].lat, lon:data[0].lon})
+        }
+        }}/>
 
-      <button onClick={getData}>Получить данные</button>
+      <button onClick={() => {
+        if (dataCoord) {
+          dispatch(changeCoordinates(dataCoord))
+        }}}>Получить данные</button>
 
-      {!!data && <DenseTable data={data} />}
+        <div>{lon}</div>
+        <div>{lat}</div>
+      {/* {!!res && <DenseTable Data={res} />} */}
     </div>
   );
 }

@@ -1,15 +1,19 @@
 import { YMaps, Map, Placemark, GeolocationControl, Rectangle } from '@pbe/react-yandex-maps';
 import { YMapGeolocationControl } from '@yandex/ymaps3-types/packages/controls';
+import { useAppSelector } from '../../store/baseHooks';
 
-const mapState = { center: [56.02, 92.92], zoom: 10 };
 
-export const YandexMap = () => (
+export const YandexMap = () => {
+
+  const {lat, lon} = useAppSelector(state => state.coordinates)
+  const mapState = { center: [lat, lon], zoom: 10 };
+
+return(
   <YMaps>
     <Map state={mapState} width='80vw' height='90vh'>
-
       <Placemark
         geometry={{
-          coordinates: [56.0043, 92.5217]
+          coordinates: [lat, lon]
         }}
         properties={{
           hintContent: 'Собственный значок метки',
@@ -22,8 +26,8 @@ export const YandexMap = () => (
           iconImageOffset: [-3, -42]
         }}
       />
-      <GeolocationControl />
-      <Placemark geometry={[56.02, 92.92]}/>
+        <GeolocationControl />
+      <Placemark geometry={[lat, lon]}/>
     </Map>
   </YMaps>
-);
+)};

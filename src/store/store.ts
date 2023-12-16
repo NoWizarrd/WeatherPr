@@ -1,12 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./counterSlice";
-import { postApiSlice } from "./postsApi";
+import { weatherApi } from "./weatherApi";
+import citySlice from "./citySlice";
+import coordSlice from "./coordSlice";
 
-export default configureStore({
+export const store = configureStore({
   reducer: {
-    counter: counterReducer,
-    [postApiSlice.reducerPath]: postApiSlice.reducer,
+    city: citySlice,
+    coordinates: coordSlice,
+    [weatherApi.reducerPath]: weatherApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(postApiSlice.middleware),
+    getDefaultMiddleware().concat(weatherApi.middleware),
 });
+
+export type RootState = ReturnType<typeof store.getState>
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch

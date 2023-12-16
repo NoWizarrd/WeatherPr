@@ -7,7 +7,7 @@ import ListPage from "./pages/List_page.tsx";
 import Content from "./modules/content/Content.tsx";
 import QueryPage from "./pages/QueryPage.tsx";
 
-import store from "./store/store.ts";
+import {store} from '../src/store/store.ts'
 import { Provider } from "react-redux";
 import ReduxPage from "./pages/ReduxPage.tsx";
 

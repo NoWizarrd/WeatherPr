@@ -14,7 +14,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "src/*": ["./src/*", "./dist/*",]
+      "../*": ["./src/*", "./dist/*",]
     },
     //"typeRoots": ["node_modules/@yandex/ymaps3-types/"],
     /* Linting */

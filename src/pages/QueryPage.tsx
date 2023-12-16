@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import useQuery from "../hooks/useQuery";
-import { GeocoderResponse } from "src/modules/api/schemas";
-import Counter from "../components/Counter";
+import { GeocoderResponse } from "../modules/api/schemas";
 
 export default function QueryPage() {
   const [city, setCity] = useState("");

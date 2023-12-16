@@ -17,6 +17,5 @@ export default function MapPage() {
     <Aria>
         <YandexMap/>
     </Aria>
-
   )
 }
