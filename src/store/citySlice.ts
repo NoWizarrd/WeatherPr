@@ -6,7 +6,7 @@ interface cityState {
   
   // Define the initial state using that type
   const initialState: cityState = {
-    city: 'Krasnoyarsk',
+    city: '',
   }
 
 export const citySlice = createSlice({

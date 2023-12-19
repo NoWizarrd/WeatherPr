@@ -1,5 +1,4 @@
-import { YMaps, Map, Placemark, GeolocationControl, Rectangle } from '@pbe/react-yandex-maps';
-import { YMapGeolocationControl } from '@yandex/ymaps3-types/packages/controls';
+import { YMaps, Map, Placemark, GeolocationControl } from '@pbe/react-yandex-maps';
 import { useAppSelector } from '../../store/baseHooks';
 
 

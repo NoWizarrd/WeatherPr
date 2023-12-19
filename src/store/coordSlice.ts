@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { useGetCoordinatesQuery } from "./weatherApi";
 
 interface coordinatesState {
     lat: number;
@@ -16,11 +15,11 @@ export const coordSlice = createSlice({
     initialState,
     reducers: {
         changeCoordinates: (state, action:PayloadAction<coordinatesState>) =>{
-            console.log(action.payload)
             state.lat = action.payload.lat
             state.lon = action.payload.lon
         }
-    }
+    },
+
 })
 
 export default coordSlice.reducer

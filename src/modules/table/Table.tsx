@@ -29,7 +29,7 @@ export default function DenseTable({ Data }: { Data: WeatherResponse }) {
   }
 
   return (
-    <TableContainer component={Paper} sx={{ maxWidth: "50vw" }}>
+    <TableContainer component={Paper} sx={{ width: "700px" }}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableBody>
           {rows.map((row) => (

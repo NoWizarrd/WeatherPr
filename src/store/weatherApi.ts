@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { GeocoderResponse, WeatherResponse } from "../modules/api/schemas";
-import { useAppSelector } from "./baseHooks";
 
 const BASE_URL = "https://api.openweathermap.org";
 const appid = "7c105a75bb7e095e8ba6d6e3cadfca70";
@@ -17,27 +16,31 @@ export const weatherApi = createApi({
   }),
   endpoints: (builder) => ({
     getCoordinates: builder.query({
-      query: (city:string) => ({
+      query: (city: string) => ({
         url: geocoderUrl,
         params: {
           q: city,
           limit: 1,
           appid: appid,
-        }
+        },
       }),
     }),
-    getWeather: builder.query<WeatherResponse, any>({
-      query: (response:GeocoderResponse) => ({
+    getWeather: builder.query<WeatherResponse, GeocoderResponse>({
+      query: (response) => ({
         url: weatherUrl,
         params: {
           lat: response.lat,
           lon: response.lon,
           appid: appid,
-        }
+        },
       }),
-    })
+    }),
   }),
 });
 
-
-export const {useGetCoordinatesQuery, useGetWeatherQuery} = weatherApi
+export const {
+  useGetCoordinatesQuery,
+  useGetWeatherQuery,
+  useLazyGetCoordinatesQuery,
+  useLazyGetWeatherQuery,
+} = weatherApi;
